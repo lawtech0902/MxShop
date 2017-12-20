@@ -24,35 +24,37 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 from goods.views import GoodsListViewSet, CategoryViewset
 from users.views import SmsCodeViewset, UserViewset
-from user_operation.views import UserFavViewset
+from user_operation.views import UserFavViewset, LeavingMessageViewset, AddressViewset
 
 router = DefaultRouter()
 
-# 配置goods的url
+# 配置goods的url(商品)
 router.register(r'goods', GoodsListViewSet, base_name="goods")
 
-# 配置category的url
+# 配置category的url(商品种类)
 router.register(r'categorys', CategoryViewset, base_name="categorys")
 
-# 配置code的url
+# 配置code的url(验证码)
 router.register(r'codes', SmsCodeViewset, base_name="codes")
 
-# 配置users的url
+# 配置users的url(用户)
 router.register(r'users', UserViewset, base_name="users")
 
-# 配置userfav的url
+# 配置userfavs的url(收藏)
 router.register(r'userfavs', UserFavViewset, base_name="userfavs")
+
+# 配置messages的url(留言)
+router.register(r'messages', LeavingMessageViewset, base_name="messages")
+
+# 配置address的url(收货地址)
+router.register(r'address', AddressViewset, base_name="address")
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
-
     url(r'^', include(router.urls)),
-
     url(r'docs/', include_docs_urls(title='慕学生鲜')),
-
     url(r'^api-token-auth/', views.obtain_auth_token),
-
     url(r'^login/', obtain_jwt_token)
 ]
