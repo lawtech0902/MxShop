@@ -32,8 +32,10 @@ class OrderInfo(models.Model):
     订单
     """
     ORDER_STATUS = (
-        ("success", "成功"),
-        ("cancel", "取消"),
+        ("TRADE_SUCCESS", "成功"),
+        ("TRADE_CLOSED", "超时关闭"),
+        ("WAIT_BUYER_PAY", "交易创建"),
+        ("TRADE_FINISHED", "交易结束"),
         ("paying", "待支付"),
     )
 

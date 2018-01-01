@@ -28,7 +28,7 @@ SECRET_KEY = 'qj@$!8i4uhm2j8*1)fy!^+=-tfc51(6j$x*#@)*tt*-(upo-1i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = 'users.UserProfile'
 
@@ -95,8 +95,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "mxshop",
         'USER': "root",
-        'PASSWORD': "12",
-        'HOST': "127.0.0.1",
+        'PASSWORD': "123456",
+        'HOST': "47.100.40.228",
         'OPTIONS': {'init_command': 'SET default_storage_engine=INNODB;'}
     }
 }
@@ -168,3 +168,7 @@ REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^176\d{8}$"
 
 # 云片网设置
 APIKEY = "c79128fa3912fd6abe2fffde3dfd99a1"
+
+# 支付宝相关配置
+private_key_path = os.path.join(BASE_DIR, "apps/trade/keys/private_2048.txt")
+ali_pub_key_path = os.path.join(BASE_DIR, "apps/trade/keys/alipay_key_2048.txt")
