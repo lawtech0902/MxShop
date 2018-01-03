@@ -21,9 +21,11 @@ from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
+
+import DjangoUeditor
 import xadmin
 
-from goods.views import GoodsListViewSet, CategoryViewset
+from goods.views import GoodsListViewSet, CategoryViewset, BannerViewset, HotSearchsViewset, IndexCategoryViewset
 from users.views import SmsCodeViewset, UserViewset
 from user_operation.views import UserFavViewset, LeavingMessageViewset, AddressViewset
 from trade.views import ShoppingCartViewset, OrderViewset, AlipayView
@@ -57,8 +59,18 @@ router.register(r'shopcarts', ShoppingCartViewset, base_name="shopcarts")
 # 配置orders的url(订单)
 router.register(r'orders', OrderViewset, base_name="orders")
 
+# 配置hotsearchs的url(热搜)
+router.register(r'hotsearchs', HotSearchsViewset, base_name="hotsearchs")
+
+# 配置banners的url(轮播图)
+router.register(r'banners', BannerViewset, base_name="banners")
+
+# 配置indexgoods的url(首页商品系列数据)
+router.register(r'indexgoods', IndexCategoryViewset, base_name="indexgoods")
+
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
+    url(r'^ueditor/', include('DjangoUeditor.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
     url(r'^index/', TemplateView.as_view(template_name="index.html"), name="index"),

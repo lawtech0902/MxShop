@@ -95,8 +95,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "mxshop",
         'USER': "root",
-        'PASSWORD': "123456",
-        'HOST': "47.100.40.228",
+        # 'PASSWORD': "123456",
+        # 'HOST': "47.100.40.228",
+        'PASSWORD': "12",
+        'HOST': "127.0.0.1",
         'OPTIONS': {'init_command': 'SET default_storage_engine=INNODB;'}
     }
 }
@@ -153,6 +155,15 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework.authentication.TokenAuthentication', // 不做全局的Token
     ),
+    # 'DEFAULT_THROTTLE_CLASSES': (
+    #     'rest_framework.throttling.AnonRateThrottle',
+    #     'rest_framework.throttling.UserRateThrottle'
+    # ),
+    # # 参数限速测试用
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'anon': '2/minute',
+    #     'user': '3/minute'
+    # }
 }
 
 import datetime
@@ -169,6 +180,22 @@ REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^176\d{8}$"
 # 云片网设置
 APIKEY = "c79128fa3912fd6abe2fffde3dfd99a1"
 
+# drf缓存过期时间设置
+REST_FRAMEWORK_EXTENSIONS = {
+    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 5
+}
+
 # 支付宝相关配置
 private_key_path = os.path.join(BASE_DIR, "apps/trade/keys/private_2048.txt")
 ali_pub_key_path = os.path.join(BASE_DIR, "apps/trade/keys/alipay_key_2048.txt")
+
+# django-redis配置
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#         }
+#     }
+# }
