@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'xadmin',
     'rest_framework',
     'corsheaders',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -80,6 +81,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -134,6 +137,10 @@ USE_TZ = False  # 默认是Ture，时间是utc时间，由于我们要用本地�
 # 设置认证后端
 AUTHENTICATION_BACKENDS = (
     'users.views.CustomBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.weibo.WeiboOAuth2',
+    'social_core.backends.qq.QQOAuth2',
+    'social_core.backends.weixin.WeixinOAuth2',
 )
 
 # Static files (CSS, JavaScript, Images)
@@ -199,3 +206,14 @@ ali_pub_key_path = os.path.join(BASE_DIR, "apps/trade/keys/alipay_key_2048.txt")
 #         }
 #     }
 # }
+
+SOCIAL_AUTH_WEIBO_KEY = 1709286761
+SOCIAL_AUTH_WEIBO_SECRET = "08ea25734324070b42ebc01c25c42ea7"
+
+# SOCIAL_AUTH_QQ_KEY = 'foobar'
+# SOCIAL_AUTH_QQ_SECRET = 'bazqux'
+#
+# SOCIAL_AUTH_WEIXIN_KEY = 'foobar'
+# SOCIAL_AUTH_WEIXIN_SECRET = 'bazqux'
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/index/'

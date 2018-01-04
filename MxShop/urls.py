@@ -77,6 +77,8 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'docs/', include_docs_urls(title='慕学生鲜')),
     url(r'^api-token-auth/', views.obtain_auth_token),
-    url(r'^login/', obtain_jwt_token),
+    url(r'^login/$', obtain_jwt_token),
     url(r'^alipay/return/', AlipayView.as_view(), name="alipay"),
+    # 第三方登录url
+    url('', include('social_django.urls', namespace='social'))
 ]
